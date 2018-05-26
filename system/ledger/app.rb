@@ -5,6 +5,6 @@ module Ledger
   class App < Dry::System::Container
     use :env, inferrer: -> { ENV.fetch('APP_ENV', 'development').to_sym }
 
-    load_paths! 'lib'
+    load_paths! 'lib', 'app'
   end
 end
