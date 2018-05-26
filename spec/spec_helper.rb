@@ -13,10 +13,10 @@ Dotenv.load('.env.test', '.env')
 
 SPEC_ROOT = Pathname(__FILE__).dirname
 
-Dir[SPEC_ROOT.join('/factories/**/*.rb')].each { |f| require f }
-Dir[SPEC_ROOT.join('/support/**/*.rb')].each { |f| require f }
-
 require SPEC_ROOT.join('../system/ledger/app')
+
+Dir[SPEC_ROOT.join('support/**/*.rb')].each { |f| require f }
+Dir[SPEC_ROOT.join('factories/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   config.filter_run_when_matching :focus
