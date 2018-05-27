@@ -14,7 +14,7 @@ RSpec.describe Ledger::Repos::AccountRepo, :db do
       account_with_balance = repo.balance(account.id)
 
       expect(account_with_balance.balance).
-        to eql(charges.map(&:amount).sum - payouts.map(&:amount).sum)
+        to eql(charges.sum(&:amount) - payouts.sum(&:amount))
     end
   end
 end
