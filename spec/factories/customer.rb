@@ -1,7 +1,6 @@
 require 'bigdecimal'
 
-Factory.define :customers do |f|
-  f.sequence(:id)
+Factory.define :customer do |f|
   f.association(:account)
   f.timestamps
 end

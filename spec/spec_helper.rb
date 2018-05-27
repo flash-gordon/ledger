@@ -11,6 +11,10 @@ end
 require 'dotenv'
 Dotenv.load('.env.test', '.env')
 
+require 'warning'
+Warning.ignore(/sequel/)
+Warning.ignore(/dry-system/)
+
 SPEC_ROOT = Pathname(__FILE__).dirname
 
 require SPEC_ROOT.join('../system/ledger/app')
@@ -22,6 +26,12 @@ RSpec.configure do |config|
   config.filter_run_when_matching :focus
   config.disable_monkey_patching!
   config.warnings = true
+
+  config.include DbHelper, :db
+
+  config.around :each, :db do |ex|
+    Ledger::App['persistence.rom'].gateways[:default].transaction(rollback: :always, &ex)
+  end
 
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce

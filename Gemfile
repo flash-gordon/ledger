@@ -10,7 +10,7 @@ gem 'dry-types'
 gem 'dry-struct'
 
 gem 'rom'
-gem 'rom-sql'
+gem 'rom-sql', git: 'https://github.com/rom-rb/rom-sql', branch: 'feature/subqueries'
 gem 'pg'
 
 group :development, :test do
