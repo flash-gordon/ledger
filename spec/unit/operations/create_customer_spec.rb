@@ -4,7 +4,7 @@ require 'operations/create_customer'
 RSpec.describe Ledger::Operations::CreateCustomer do
   include Dry::Monads::Result::Mixin
 
-  let(:account) { Factory[:account] }
+  let(:account) { Factory.structs[:account] }
   let(:customer) { Factory.structs[:customer, account: account] }
 
   subject(:operation) { described_class.new(repo: double(create: customer)) }

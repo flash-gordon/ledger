@@ -4,6 +4,7 @@ module Persistence
       schema(:accounts) do
         attribute :id,         Types::Serial
         attribute :currency,   Types::String
+        attribute :api_key,    Types::String
 
         attribute :created_at, Types::Time
         attribute :updated_at, Types::Time
