@@ -7,10 +7,10 @@ RSpec.describe Ledger::Repos::AccountRepo, :db do
   let(:customer) { Factory[:customer, account: account] }
 
   describe '#balance' do
-    it 'adds chargs and subtracts payouts' do
-      charges = 3.times.map { Factory[:charge, customer: Factory[:customer, account: account]] }
-      payouts = 3.times.map { Factory[:payout, account: account] }
+    let!(:charges) { 3.times.map { Factory[:charge, customer: Factory[:customer, account: account]] } }
+    let!(:payouts) { 3.times.map { Factory[:payout, account: account] } }
 
+    it 'adds chargs and subtracts payouts' do
       account_with_balance = repo.balance(account.id)
 
       expect(account_with_balance.balance).

@@ -3,6 +3,7 @@ module Persistence
     class Customers < ROM::Relation[:sql]
       schema(:customers) do
         attribute :id,         Types::Serial
+        attribute :name,       Types::String
         attribute :account_id, Types::ForeignKey(:accounts)
 
         attribute :created_at, Types::Time
