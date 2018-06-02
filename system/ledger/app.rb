@@ -5,6 +5,15 @@ module Ledger
   class App < Dry::System::Container
     use :env, inferrer: -> { ENV.fetch('APP_ENV', 'development').to_sym }
 
+    configure do |config|
+      config.default_namespace = 'ledger'
+      config.inflector = Dry::Inflector.new do |inflections|
+        inflections.acronym('API')
+      end
+    end
+
     load_paths! 'lib', 'app'
+
+    Import = injector
   end
 end

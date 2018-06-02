@@ -1,4 +1,4 @@
-require 'lib/generate_api_key'
+require 'ledger/lib/generate_api_key'
 
 RSpec.describe Ledger::Lib::GenerateAPIKey do
   subject(:generate) { described_class.new }

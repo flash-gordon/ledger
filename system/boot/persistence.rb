@@ -11,11 +11,12 @@ Ledger::App.boot :persistence, namespace: true do |app|
 
     rom_config = ROM::Configuration.new(
       :sql,
-      app[:settings].database_url
+      app[:settings].database_url,
+      namespace: 'ledger'
     )
 
     rom_config.plugin :sql, relations: :auto_restrictions
-    rom_config.auto_registration app.root.join('lib/persistence')
+    rom_config.auto_registration app.root.join('lib/ledger/persistence')
 
     register 'config', rom_config
     register 'db', rom_config.gateways[:default].connection

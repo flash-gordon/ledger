@@ -1,5 +1,5 @@
 require 'securerandom'
-require 'lib/hash_api_key'
+require 'ledger/lib/hash_api_key'
 require 'digest'
 
 RSpec.describe Ledger::Lib::HashAPIKey do
