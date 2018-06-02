@@ -16,6 +16,7 @@ RSpec.describe Ledger::Lib::APIAuthentication, :api do
   end
 
   let(:account) { Factory.structs[:account] }
+
   let(:authenticate) do
     proc do |key|
       expect(key).to eql(api_key)
