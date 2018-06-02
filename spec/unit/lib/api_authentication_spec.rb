@@ -31,6 +31,6 @@ RSpec.describe Ledger::Lib::APIAuthentication, :api do
 
     updated_env = requests[0]
 
-    expect(updated_env).to include(account: account)
+    expect(updated_env).to include('ledger.account' => account)
   end
 end

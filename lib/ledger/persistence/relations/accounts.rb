@@ -13,6 +13,10 @@ module Persistence
           has_many :payouts
           has_many :customers
         end
+
+        indexes do
+          index :api_key, unique: true
+        end
       end
 
       def with_balance

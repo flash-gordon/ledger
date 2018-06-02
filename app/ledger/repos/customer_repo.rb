@@ -3,7 +3,12 @@ module Ledger
     class CustomerRepo < ROM::Repository[:customers]
       include ArgsImport['persistence.rom']
 
-      commands :create
+      def create(customer)
+        customers.
+          changeset(:create, customer).
+          map(:add_timestamps).
+          commit
+      end
     end
   end
 end

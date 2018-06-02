@@ -4,14 +4,10 @@ module Ledger
   module Operations
     class Authenticate
       include Dry::Monads::Result::Mixin
-      include Import['lib.hash_api_key']
-
-      attr_reader :repo
-
-      def initialize(repo:, **kwargs)
-        super(kwargs)
-        @repo = repo
-      end
+      include Import[
+                'lib.hash_api_key',
+                repo: 'repos.account_repo'
+              ]
 
       def call(key)
         hashed_key = hash_api_key.(key)
