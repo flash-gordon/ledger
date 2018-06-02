@@ -28,9 +28,22 @@ RSpec.configure do |config|
   config.warnings = true
 
   config.include DbHelper, :db
+  config.include APIHelper, :api
 
   config.around :each, :db do |ex|
     Ledger::App['persistence.rom'].gateways[:default].transaction(rollback: :always, &ex)
+  end
+
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true
+  end
+
+  config.before :all, :api do
+    require 'ledger/api'
+  end
+
+  config.before :all, :db do
+    Ledger::App.start(:persistence)
   end
 
   # Seed global randomization in this process using the `--seed` CLI option.

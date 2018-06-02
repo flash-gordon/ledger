@@ -4,7 +4,7 @@ module Ledger
   module Operations
     class Authenticate
       include Dry::Monads::Result::Mixin
-      include App::Import['lib.hash_api_key']
+      include Import['lib.hash_api_key']
 
       attr_reader :repo
 

@@ -1,5 +1,5 @@
 require 'dry/monads/result'
-require 'operations/authenticate'
+require 'ledger/operations/authenticate'
 
 RSpec.describe Ledger::Operations::Authenticate do
   include Dry::Monads::Result::Mixin

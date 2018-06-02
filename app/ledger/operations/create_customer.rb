@@ -18,11 +18,7 @@ module Ledger
         required(:name, :string).filled(:str?)
       end
 
-      attr_reader :repo
-
-      def initialize(repo:)
-        @repo = repo
-      end
+      include Import[repo: 'repos.customer_repo']
 
       def call(account, params)
         values = yield Schema.(params)

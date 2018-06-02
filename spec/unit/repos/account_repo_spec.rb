@@ -1,4 +1,4 @@
-require 'repos/account_repo'
+require 'ledger/repos/account_repo'
 
 RSpec.describe Ledger::Repos::AccountRepo, :db do
   subject(:repo) { described_class.new(rom) }

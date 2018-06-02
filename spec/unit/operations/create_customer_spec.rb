@@ -1,5 +1,5 @@
 require 'dry/monads/result'
-require 'operations/create_customer'
+require 'ledger/operations/create_customer'
 
 RSpec.describe Ledger::Operations::CreateCustomer do
   include Dry::Monads::Result::Mixin

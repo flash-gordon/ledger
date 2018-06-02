@@ -13,7 +13,8 @@ module Ledger
     end
 
     load_paths! 'lib', 'app'
-
-    Import = injector
   end
+
+  Import = App.injector
+  ArgsImport = Import.args
 end
