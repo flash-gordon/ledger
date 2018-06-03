@@ -11,8 +11,6 @@ module Ledger
       use Lib::JSONBody
       use Lib::JSONResponse
 
-      include Import['operations.create_customer']
-
       FAILED = 'No luck'
 
       def account

@@ -7,7 +7,12 @@ RSpec.describe Ledger::Lib::JSONBody do
 
   let(:requests) { [] }
 
-  let(:env) { { 'rack.input' => double(read: json) } }
+  let(:env) do
+    {
+      'rack.input' => double(read: json),
+      'REQUEST_METHOD' => 'POST'
+    }
+  end
 
   let(:app) do
     proc do |env|
@@ -24,5 +29,15 @@ RSpec.describe Ledger::Lib::JSONBody do
     updated_env = requests[0]
 
     expect(updated_env).to include('rack.request.json' => data)
+  end
+
+  context 'GET' do
+    it 'passes through GET requests' do
+      middleware.('REQUEST_METHOD' => 'GET')
+
+      updated_env = requests[0]
+
+      expect(updated_env).not_to have_key('rack.request.json')
+    end
   end
 end

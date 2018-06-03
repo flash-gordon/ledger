@@ -7,6 +7,7 @@ module Ledger
     class JSONBody
       IO_KEY = 'rack.input'
       JSON_KEY = 'rack.request.json'
+      REQUEST_METHOD = 'REQUEST_METHOD'
 
       bad_request = 'Bad request'
       BAD_REQUEST = [
@@ -22,11 +23,18 @@ module Ledger
       end
 
       def call(env)
-        body = env[IO_KEY].read
+        if get?(env)
+          @app.(env)
+        else
+          body = env[IO_KEY].read
+          Try[JSON::ParserError] { JSON.parse(body, symbolize_names: true) }.
+            fmap { |json| @app.(env.merge(JSON_KEY => json)) }.
+            value_or(BAD_REQUEST)
+        end
+      end
 
-        Try[JSON::ParserError] { JSON.parse(body, symbolize_names: true) }.
-          fmap { |json| @app.(env.merge(JSON_KEY => json)) }.
-          value_or(BAD_REQUEST)
+      def get?(env)
+        env[REQUEST_METHOD] == 'GET'
       end
     end
   end
