@@ -1,4 +1,8 @@
+require 'ledger/api/customers'
+
 RSpec.describe '/customers', :db, :api do
+  let(:app) { Ledger::API::Customers }
+
   describe 'POST' do
     let(:api_key) { SecureRandom.uuid }
     let(:account) { Factory[:account, api_key: Digest::SHA256.hexdigest(api_key)] }
@@ -9,7 +13,7 @@ RSpec.describe '/customers', :db, :api do
         name: customer.name
       )
 
-      post '/customers', body, make_auth_headers(api_key)
+      post '/', body, make_auth_headers(api_key)
 
       expect(parse_response(last_response)).
         to include(name: customer.name)

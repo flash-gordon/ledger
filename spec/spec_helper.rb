@@ -38,10 +38,6 @@ RSpec.configure do |config|
     meta[:aggregate_failures] = true
   end
 
-  config.before :all, :api do
-    require 'ledger/api'
-  end
-
   config.before :all, :db do
     Ledger::App.start(:persistence)
   end

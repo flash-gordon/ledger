@@ -1,2 +1,2 @@
 require 'system/boot'
-run Ledger::API.freeze.app
+map('/customers') { run Ledger::API::Customers }
