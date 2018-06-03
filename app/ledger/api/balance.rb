@@ -4,10 +4,13 @@ require_relative 'base'
 module Ledger
   module API
     class Balance < Base
-      include Import[repo: 'repos.account_repo']
+      include Import[
+                'lib.to_cents',
+                repo: 'repos.account_repo'
+              ]
 
       get '/' do
-        { balance: repo.balance(account.id).balance.to_f }
+        { balance: to_cents.(repo.balance(account.id).balance) }
       end
     end
   end

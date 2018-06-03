@@ -23,11 +23,14 @@ module Ledger
         required(:amount, :integer).filled(:int?, :has_funds?)
       end
 
+      include Import['lib.from_cents']
+
       attr_reader :account_repo
 
       attr_reader :payout_repo
 
-      def initialize(account_repo:, payout_repo:)
+      def initialize(account_repo:, payout_repo:, **deps)
+        super(deps)
         @account_repo = account_repo
         @payout_repo = payout_repo
       end
@@ -38,7 +41,7 @@ module Ledger
 
           values = yield schema.(params)
 
-          amount = BigDecimal(values[:amount]) / 100
+          amount = from_cents.(values[:amount])
 
           payout = payout_repo.create(account_id: account.id, amount: amount)
 

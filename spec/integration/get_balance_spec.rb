@@ -10,7 +10,7 @@ RSpec.describe '/balance', :db, :api do
       get '/', nil, make_auth_headers(api_key)
 
       expect(parse_response(last_response)).
-        to eql(balance: 0.0)
+        to eql(balance: 0)
     end
   end
 end
