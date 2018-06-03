@@ -11,9 +11,7 @@ module Ledger
       include Dry::Monads::Do::All
 
       Schema = Dry::Validation.JSON do
-        configure do
-          config.type_specs = true
-        end
+        configure { config.type_specs = true }
 
         required(:name, :string).filled(:str?)
       end

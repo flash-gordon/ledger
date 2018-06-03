@@ -14,6 +14,7 @@ Dotenv.load('.env.test', '.env')
 require 'warning'
 Warning.ignore(/sequel/)
 Warning.ignore(/dry-system/)
+Warning.ignore(/dry-validation/)
 
 SPEC_ROOT = Pathname(__FILE__).dirname
 
