@@ -10,20 +10,20 @@ module Ledger
 
       Schema = Dry::Validation.JSON do
         configure do
-          option :account
+          option :balance
 
           config.type_specs = true
           config.messages_file = Ledger::App.root.join('config/errors.yml')
 
           def has_funds?(amount)
-            account.balance * 100 >= amount
+            balance >= amount
           end
         end
 
         required(:amount, :integer).filled(:int?, :has_funds?)
       end
 
-      include Import['lib.from_cents']
+      include Import['lib.from_cents', 'lib.to_cents']
 
       attr_reader :account_repo
 
@@ -37,7 +37,7 @@ module Ledger
 
       def call(account, params)
         account_repo.lock(account.id) do |account_with_balance|
-          schema = Schema.with(account: account_with_balance)
+          schema = Schema.with(balance: to_cents.(account_with_balance.balance))
 
           values = yield schema.(params)
 
