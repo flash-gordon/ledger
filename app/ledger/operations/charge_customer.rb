@@ -27,7 +27,7 @@ module Ledger
         end
 
         required(:amount, :integer).filled(:int?, gt?: 0)
-        required(:customer, :integer).filled(:int?)
+        required(:customer, :integer).filled(:int?, :customer_exist?)
       end
 
       def call(account, params)

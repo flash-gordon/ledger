@@ -10,22 +10,40 @@ module Ledger
 
       Schema = Dry::Validation.JSON do
         configure do
+          option :account
+
           config.type_specs = true
+          config.messages_file = Ledger::App.root.join('config/errors.yml')
+
+          def has_funds?(amount)
+            account.balance * 100 >= amount
+          end
         end
+
+        required(:amount, :integer).filled(:int?, :has_funds?)
       end
 
-      attr_reader :repo
+      attr_reader :account_repo
 
-      def initialize(repo:)
-        @repo = repo
+      attr_reader :payout_repo
+
+      def initialize(account_repo:, payout_repo:)
+        @account_repo = account_repo
+        @payout_repo = payout_repo
       end
 
       def call(account, params)
-        values = yield Schema.(params)
+        account_repo.lock(account.id) do |account_with_balance|
+          schema = Schema.with(account: account_with_balance)
 
-        payout = repo.create(**values, account_id: account.id)
+          values = yield schema.(params)
 
-        Success(payout)
+          amount = BigDecimal(values[:amount]) / 100
+
+          payout = payout_repo.create(account_id: account.id, amount: amount)
+
+          Success(payout)
+        end
       end
     end
   end
