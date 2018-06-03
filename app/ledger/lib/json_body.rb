@@ -1,3 +1,5 @@
+# auto_register: false
+require 'json'
 require 'dry/monads/try'
 
 module Ledger

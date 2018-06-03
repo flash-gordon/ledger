@@ -1,11 +1,13 @@
 require 'sinatra/base'
 require 'ledger/lib/api_authentication'
 require 'ledger/lib/json_body'
+require 'ledger/lib/json_response'
 
 module Ledger
   class API < Sinatra::Application
     use Lib::APIAuthentication
     use Lib::JSONBody
+    use Lib::JSONResponse
 
     include Import['operations.create_customer']
 
@@ -13,10 +15,7 @@ module Ledger
 
     post '/customers' do
       create_customer.(account, data).fmap { |customer|
-        JSON.dump(
-          id: customer.id,
-          name: customer.name
-        )
+        { id: customer.id, name: customer.name }
       }.value_or { FAILED }
     end
 
