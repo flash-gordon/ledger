@@ -18,7 +18,7 @@ RSpec.describe Ledger::Operations::ChargeCustomer do
 
   it 'creates a charge' do
     params = {
-      'amount' => (charge.amount * 100).to_i,
+      'amount' => Integer(charge.amount * 100),
       'customer' => customer.id
     }
 

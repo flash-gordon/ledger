@@ -14,7 +14,6 @@ module Ledger
         transaction do
           account = balances.lock.by_pk(account_id).one!
           yield(account)
-          nil
         end
       end
 

@@ -36,7 +36,7 @@ RSpec.describe Ledger::Operations::CreatePayout do
 
     it 'creates a new payout' do
       params = {
-        'amount' => (payout.amount * 100).to_i
+        'amount' => Integer(payout.amount * 100)
       }
 
       expect(operation.(account, params)).to eql(Success(payout))

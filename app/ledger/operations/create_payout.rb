@@ -23,17 +23,12 @@ module Ledger
         required(:amount, :integer).filled(:int?, :has_funds?)
       end
 
-      include Import['lib.from_cents', 'lib.to_cents']
-
-      attr_reader :account_repo
-
-      attr_reader :payout_repo
-
-      def initialize(account_repo:, payout_repo:, **deps)
-        super(deps)
-        @account_repo = account_repo
-        @payout_repo = payout_repo
-      end
+      include Import[
+                'repos.account_repo',
+                'repos.payout_repo',
+                'lib.from_cents',
+                'lib.to_cents'
+              ]
 
       def call(account, params)
         account_repo.lock(account.id) do |account_with_balance|

@@ -32,9 +32,14 @@ RSpec.describe Ledger::Repos::AccountRepo, :db do
 
     it 'yields a block and passes balance' do
       account_with_balance = nil
-      repo.lock(account.id) { |account| account_with_balance = account }
+
+      result = repo.lock(account.id) do |account|
+        account_with_balance = account
+        :result
+      end
 
       expect(account_with_balance.balance).to eql(charge.amount)
+      expect(result).to eql(:result)
     end
   end
 end
