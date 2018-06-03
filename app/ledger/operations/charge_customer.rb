@@ -8,9 +8,12 @@ module Ledger
       include Dry::Monads::Result::Mixin
       include Dry::Monads::Do::All
 
+      include Import['lib.from_cents']
+
       attr_reader :repo
 
-      def initialize(repo:)
+      def initialize(repo:, **deps)
+        super(deps)
         @repo = repo
       end
 
@@ -35,7 +38,9 @@ module Ledger
 
         values = yield schema.(params)
 
-        Success(repo.create(values))
+        amount = from_cents.(values[:amount])
+
+        Success(repo.create(amount: amount, customer_id: values[:customer]))
       end
     end
   end

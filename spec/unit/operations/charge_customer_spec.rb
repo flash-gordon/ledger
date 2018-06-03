@@ -10,10 +10,22 @@ RSpec.describe Ledger::Operations::ChargeCustomer do
 
   let(:charge) { Factory.structs[:charge, customer: customer] }
 
+  let(:repo) do
+    repo = double('charge repo')
+
+    allow(repo).to receive(:create).
+                     with(amount: charge.amount, customer_id: customer.id).
+                     and_return(charge)
+
+    allow(repo).to receive(:customer_exist?).
+                     with(account.id, customer.id).
+                     and_return(true)
+
+    repo
+  end
+
   subject(:operation) do
-    described_class.new(
-      repo: double(create: charge, customer_exist?: true)
-    )
+    described_class.new(repo: repo)
   end
 
   it 'creates a charge' do
