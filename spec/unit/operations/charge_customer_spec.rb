@@ -5,7 +5,9 @@ RSpec.describe Ledger::Operations::ChargeCustomer do
   include Dry::Monads::Result::Mixin
 
   let(:account) { Factory.structs[:account] }
+
   let(:customer) { Factory.structs[:customer, account: account] }
+
   let(:charge) { Factory.structs[:charge, customer: customer] }
 
   subject(:operation) do
