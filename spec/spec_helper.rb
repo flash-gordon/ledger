@@ -1,4 +1,4 @@
-
+ENV['APP_ENV'] = 'test'
 require 'bundler/setup'
 
 require 'rspec'

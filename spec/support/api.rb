@@ -1,4 +1,5 @@
 require 'rack/test'
+require 'base64'
 
 module APIHelper
   include Rack::Test::Methods

@@ -1,16 +1,17 @@
 require 'sinatra/base'
 require 'ledger/lib/api_authentication'
+require 'ledger/lib/json_body'
 
 module Ledger
   class API < Sinatra::Application
-    use Ledger::Lib::APIAuthentication
+    use Lib::APIAuthentication
+    use Lib::JSONBody
 
     include Import['operations.create_customer']
 
     FAILED = 'No luck'
 
     post '/customers' do
-      data = JSON.parse(request.body.read, symbolize_names: true)
       create_customer.(account, data).fmap { |customer|
         JSON.dump(
           id: customer.id,
@@ -21,6 +22,10 @@ module Ledger
 
     def account
       env.fetch(Lib::APIAuthentication::ACCOUNT_KEY)
+    end
+
+    def data
+      env.fetch(Lib::JSONBody::JSON_KEY)
     end
   end
 end
