@@ -11,9 +11,9 @@ RSpec.describe 'ToCents/FromCents' do
     BigDecimal(random_integer) / 100
   end
 
-  let(:to_cents) { Ledger::Lib::ToCents.new }
+  let(:to_cents) { Ledger::Lib::ToCents.instance }
 
-  let(:from_cents) { Ledger::Lib::FromCents.new }
+  let(:from_cents) { Ledger::Lib::FromCents.instance }
 
   context 'to cents' do
     it 'converts decimal to cents' do
