@@ -10,6 +10,7 @@ module Ledger
       config.inflector = Dry::Inflector.new do |inflections|
         inflections.acronym('API')
       end
+      config.auto_register = %w(lib app)
     end
 
     load_paths! 'lib', 'app'

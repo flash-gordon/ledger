@@ -5,6 +5,9 @@ end
 
 require_relative 'ledger/app'
 
-Ledger::Container.finalize!
+root = Ledger::App.root
 
-Dir.glob('../app/ledger/api/*.rb').each { |f| require f }
+Dir.glob(root.join('system/boot/*.rb')).each { |f| require f }
+Dir.glob(root.join('app/ledger/api/*.rb')).each { |f| require f }
+
+Ledger::App.finalize!

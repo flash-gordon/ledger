@@ -18,6 +18,7 @@ end
 
 gem 'rom-sql', git: 'https://github.com/rom-rb/rom-sql', branch: 'feature/subqueries'
 gem 'pg'
+gem 'puma'
 
 group :development, :test do
   gem 'pry-byebug'
