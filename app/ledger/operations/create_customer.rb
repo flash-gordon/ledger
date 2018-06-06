@@ -1,6 +1,6 @@
 require 'dry/validation'
 require 'dry/monads/result'
-require 'dry/monads/do/all'
+require 'dry/monads/do'
 
 Dry::Validation.load_extensions(:monads)
 
@@ -8,7 +8,7 @@ module Ledger
   module Operations
     class CreateCustomer
       include Dry::Monads::Result::Mixin
-      include Dry::Monads::Do::All
+      include Dry::Monads::Do
 
       Schema = Dry::Validation.JSON do
         configure { config.type_specs = true }

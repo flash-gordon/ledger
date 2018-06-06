@@ -1,4 +1,4 @@
-require 'dry/monads/do/all'
+require 'dry/monads/do'
 require 'dry/monads/result'
 require 'dry/validation'
 
@@ -6,7 +6,7 @@ module Ledger
   module Operations
     class CreatePayout
       include Dry::Monads::Result::Mixin
-      include Dry::Monads::Do::All
+      include Dry::Monads::Do
 
       Schema = Dry::Validation.JSON do
         configure do
