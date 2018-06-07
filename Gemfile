@@ -4,10 +4,10 @@ gem 'dotenv'
 
 gem 'sinatra'
 
-gem 'dry-system', git: 'https://github.com/dry-rb/dry-system'
-gem 'dry-validation'
+gem 'dry-system', '~> 0.10.0'
+gem 'dry-validation', '~> 0.12.0'
 gem 'dry-types'
-gem 'dry-struct'
+gem 'dry-struct', '~> 0.5.0'
 gem 'dry-monads', '1.0.0.rc1'
 
 gem 'rom', git: 'https://github.com/rom-rb/rom', branch: 'update-dry-types' do
