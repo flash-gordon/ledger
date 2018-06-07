@@ -4,9 +4,9 @@ require 'ledger/operations/authenticate'
 RSpec.describe Ledger::Operations::Authenticate do
   include Dry::Monads::Result::Mixin
 
-  let(:hash_key) { Ledger::App['lib.hash_api_key'] }
-
   subject(:authenticate) { described_class.new(repo: repo) }
+
+  let(:hash_key) { Ledger::App['lib.hash_api_key'] }
 
   let(:api_key) { SecureRandom.uuid }
 
