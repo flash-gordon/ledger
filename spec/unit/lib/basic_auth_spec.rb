@@ -7,7 +7,7 @@ RSpec.describe Ledger::Lib::BasicAuth, :api do
 
   let(:api_key) { SecureRandom.uuid }
 
-  subject(:auth) { described_class.new }
+  subject(:auth) { described_class.instance }
 
   it 'extracts username from auth request' do
     env = make_auth_headers(api_key)

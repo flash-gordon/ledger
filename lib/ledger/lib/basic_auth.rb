@@ -1,8 +1,11 @@
+require 'singleton'
 require 'dry/monads/result'
 
 module Ledger
   module Lib
     class BasicAuth
+      include Singleton
+
       HTTP_BASIC = 'HTTP_AUTHORIZATION'
 
       include Dry::Monads::Result::Mixin

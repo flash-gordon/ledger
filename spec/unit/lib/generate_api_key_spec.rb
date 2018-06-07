@@ -1,7 +1,7 @@
 require 'ledger/lib/generate_api_key'
 
 RSpec.describe Ledger::Lib::GenerateAPIKey do
-  subject(:generate) { described_class.new }
+  subject(:generate) { described_class.instance }
 
   it 'creates a random key' do
     expect(generate.call).not_to eql(generate.call)

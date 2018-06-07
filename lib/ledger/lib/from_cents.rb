@@ -1,5 +1,5 @@
-require 'bigdecimal'
 require 'singleton'
+require 'bigdecimal'
 
 module Ledger
   module Lib
