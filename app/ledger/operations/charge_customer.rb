@@ -8,14 +8,10 @@ module Ledger
       include Dry::Monads::Result::Mixin
       include Dry::Monads::Do
 
-      include Import['lib.from_cents']
-
-      attr_reader :repo
-
-      def initialize(repo:, **deps)
-        super(deps)
-        @repo = repo
-      end
+      include Import[
+                'lib.from_cents',
+                repo: 'repos.customer_repo'
+              ]
 
       Schema = Dry::Validation.JSON do
         configure do
