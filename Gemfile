@@ -10,13 +10,13 @@ gem 'dry-types'
 gem 'dry-struct', '~> 0.5.0'
 gem 'dry-monads', '1.0.0.rc1'
 
-gem 'rom', git: 'https://github.com/rom-rb/rom', branch: 'update-dry-types' do
+gem 'rom', git: 'https://github.com/rom-rb/rom' do
   gem 'rom-core'
   gem 'rom-mapper'
   gem 'rom-repository'
 end
 
-gem 'rom-sql', git: 'https://github.com/rom-rb/rom-sql', branch: 'feature/subqueries'
+gem 'rom-sql', git: 'https://github.com/rom-rb/rom-sql'
 gem 'pg'
 gem 'puma'
 

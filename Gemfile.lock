@@ -1,29 +1,29 @@
 GIT
   remote: https://github.com/rom-rb/rom
-  revision: ee2571017ada6088dfc657dbd184bc1386c40975
-  branch: update-dry-types
+  revision: c091a5fd3a09c877d542ccc30eed4d79010fb972
   specs:
-    rom (4.2.0)
+    rom (4.2.1)
       rom-changeset (~> 1.0, >= 1.0.2)
-      rom-core (~> 4.2, >= 4.2.0)
+      rom-core (~> 4.2, >= 4.2.1)
       rom-repository (~> 2.0, >= 2.0.2)
     rom-changeset (1.0.2)
       dry-core (~> 0.3, >= 0.3.1)
       rom-core (~> 4.0)
       transproc (~> 1.0)
-    rom-core (4.2.0)
+    rom-core (4.2.1)
       concurrent-ruby (~> 1.0)
       dry-container (~> 0.6)
       dry-core (~> 0.3)
       dry-equalizer (~> 0.2)
       dry-inflector (~> 0.1)
       dry-initializer (~> 2.0)
-      dry-types (~> 0.12, >= 0.12.1)
-      rom-mapper (~> 1.1)
-    rom-mapper (1.2.0)
+      dry-types (~> 0.13.0)
+      rom-mapper (~> 1.2, >= 1.2.1)
+    rom-mapper (1.2.1)
       dry-core (~> 0.3, >= 0.3.1)
       dry-equalizer (~> 0.2)
-      dry-struct (~> 0.3)
+      dry-struct (~> 0.5.0)
+      dry-types (~> 0.13.0)
       transproc (~> 1.0)
     rom-repository (2.0.2)
       dry-core (~> 0.3)
@@ -32,14 +32,13 @@ GIT
 
 GIT
   remote: https://github.com/rom-rb/rom-sql
-  revision: a7a1da87ee185747f2cb50bc65b2ddce8b87f3fc
-  branch: feature/subqueries
+  revision: 8a63fda3dea3124da0381cefb495ad82c3668bef
   specs:
-    rom-sql (2.4.0)
+    rom-sql (2.5.0)
       dry-core (~> 0.3)
       dry-equalizer (~> 0.2)
-      dry-types (~> 0.12, >= 0.12.1)
-      rom-core (~> 4.1)
+      dry-types (~> 0.13.0)
+      rom-core (~> 4.2)
       sequel (>= 4.49)
 
 GEM
@@ -136,7 +135,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    sequel (5.8.0)
+    sequel (5.9.0)
     sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
