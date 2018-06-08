@@ -3,7 +3,9 @@ require 'dry/monads/result'
 module Ledger
   module Operations
     class Authenticate
+      # adds Success(...) and Failure(...)
       include Dry::Monads::Result::Mixin
+
       include Import[
                 'lib.hash_api_key',
                 repo: 'repos.account_repo'

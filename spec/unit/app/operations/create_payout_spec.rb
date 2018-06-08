@@ -7,10 +7,9 @@ RSpec.describe Ledger::Operations::CreatePayout do
 
   let(:payout) { Factory.structs[:charge, account: account] }
 
-  let(:balance) { double(balance: payout.amount) }
-
   let(:account_repo) do
     repo = double('account repo')
+    # we expect the operation to acquire a lock
     allow(repo).to receive(:lock).and_yield(balance)
     repo
   end
@@ -33,6 +32,8 @@ RSpec.describe Ledger::Operations::CreatePayout do
                        and_return(payout)
       repo
     end
+
+    let(:balance) { double(balance: payout.amount) }
 
     it 'creates a new payout' do
       params = {
