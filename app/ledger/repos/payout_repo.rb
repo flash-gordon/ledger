@@ -1,3 +1,5 @@
+require 'rom/repository'
+
 module Ledger
   module Repos
     class PayoutRepo < ROM::Repository[:payouts]

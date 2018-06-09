@@ -1,3 +1,5 @@
+require 'rom/repository'
+
 module Ledger
   module Repos
     class CustomerRepo < ROM::Repository[:customers]

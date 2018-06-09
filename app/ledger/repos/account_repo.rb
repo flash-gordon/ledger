@@ -1,15 +1,19 @@
-require 'rom/constants'
 require 'rom/repository'
 
 module Ledger
   module Repos
     class AccountRepo < ROM::Repository[:accounts]
+      # sequential injection
       include ArgsImport['persistence.rom']
 
+      # RO balance access
+      # shall not be used for writing data outside of
+      # transactions
       def balance(account_id)
         balances.by_pk(account_id).one!
       end
 
+      # pessimistic account lock
       def lock(account_id)
         transaction do
           account = balances.lock.by_pk(account_id).one!
