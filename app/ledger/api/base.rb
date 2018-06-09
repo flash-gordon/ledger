@@ -11,7 +11,7 @@ module Ledger
       use Lib::JSONBody
       use Lib::JSONResponse
 
-      FAILED = 'No luck'
+      include Import['lib.unprocessable_entity']
 
       def account
         env.fetch(Lib::APIAuthentication::ACCOUNT_KEY)

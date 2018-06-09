@@ -9,7 +9,7 @@ module Ledger
       post '/' do
         create_customer.(account, data).fmap { |customer|
           { id: customer.id, name: customer.name }
-        }.value_or { FAILED }
+        }.value_or { |errors| unprocessable_entity.(errors) }
       end
     end
   end
