@@ -7,9 +7,9 @@ module Ledger
       include Import['operations.create_customer']
 
       post '/' do
-        create_customer.(account, data).fmap { |customer|
-          { id: customer.id, name: customer.name }
-        }.value_or { |errors| unprocessable_entity.(errors) }
+        create_customer.(account, data).
+          fmap { |customer| { id: customer.id, name: customer.name } }.
+          value_or { |errors| unprocessable_entity.(errors) }
       end
     end
   end

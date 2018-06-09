@@ -9,7 +9,7 @@ module Ledger
       post '/' do
         create_payout.(account, data).
           fmap { |payout| { id: payout.id } }.
-          value_or { |errors| errors }
+          value_or { |errors| unprocessable_entity.(errors) }
       end
     end
   end

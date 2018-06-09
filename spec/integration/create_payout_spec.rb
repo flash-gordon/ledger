@@ -34,5 +34,12 @@ RSpec.describe '/payouts', :db, :api do
       expect(parse_response(last_response)).
         to eql(id: persisted_payout.id)
     end
+
+    example 'invalid request' do
+      post '/', JSON.dump({}), make_auth_headers(api_key)
+
+      expect(parse_response(last_response)).
+        to eql(amount: ['is missing', 'insufficient funds'])
+    end
   end
 end
