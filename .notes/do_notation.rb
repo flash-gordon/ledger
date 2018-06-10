@@ -12,11 +12,13 @@ class CreateAccount
   end
 end
 
+# Equivalent to the previous code
 class CreateAccount
   include Dry::Monads::Result::Mixin
   include Dry::Monads::Do
 
   def call(params)
+    # Transaction friendly
     values = yield validate(params)
     account = yield create_account(values[:account])
     owner = yield create_owner(account, values[:owner])

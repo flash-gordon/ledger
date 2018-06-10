@@ -2,8 +2,10 @@ require 'rom/repository'
 
 module Ledger
   module Repos
+    # Repositories are meant to return plain data structures
     class AccountRepo < ROM::Repository[:accounts]
       # sequential injection
+      # since ROM requires it
       include ArgsImport['persistence.rom']
 
       # RO balance access
@@ -27,6 +29,7 @@ module Ledger
 
       private
 
+      # is not called outside of repo
       def balances
         accounts.with_balance
       end

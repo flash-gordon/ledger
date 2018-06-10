@@ -1,6 +1,7 @@
 module Persistence
   module Relations
     class Accounts < ROM::Relation[:sql]
+      # Table definition
       schema(:accounts) do
         attribute :id,         Types::Serial
         attribute :currency,   Types::String
@@ -42,6 +43,7 @@ module Persistence
 
       private
 
+      # is not meant to call even from repos
       def total_amount(rel)
         rel.project { int::coalesce(int::sum(amount), 0) }
       end
