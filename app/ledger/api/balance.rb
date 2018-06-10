@@ -14,7 +14,8 @@ module Ledger
               ]
 
       get '/' do
-        { balance: to_cents.(repo.balance(account.id).balance) }
+        account = repo.balance(account.id)
+        { balance: to_cents.(account.balance) }
       end
     end
   end
