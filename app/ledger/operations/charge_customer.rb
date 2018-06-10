@@ -2,6 +2,8 @@ require 'dry/monads/do'
 require 'dry/monads/result'
 require 'dry/validation'
 
+Dry::Validation.load_extensions(:monads)
+
 module Ledger
   module Operations
     class ChargeCustomer

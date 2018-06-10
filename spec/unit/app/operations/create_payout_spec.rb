@@ -5,7 +5,7 @@ RSpec.describe Ledger::Operations::CreatePayout do
 
   let(:account) { Factory.structs[:account] }
 
-  let(:payout) { Factory.structs[:charge, account: account] }
+  let(:payout) { Factory.structs[:payout, account: account] }
 
   let(:account_repo) do
     repo = double('account repo')
