@@ -8,3 +8,4 @@
 log/
 .env
 .rvmrc
+.idea/
